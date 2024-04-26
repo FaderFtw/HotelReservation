@@ -1,4 +1,7 @@
-package com.fady.hotel.room;
+package com.fady.hotel.Service.Interface;
+
+import com.fady.hotel.Dto.RoomSearchDTO;
+import com.fady.hotel.Entity.Room;
 
 import java.util.List;
 import java.util.Optional;

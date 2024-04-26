@@ -1,5 +1,6 @@
-package com.fady.hotel.reservation;
+package com.fady.hotel.Repository;
 
+import com.fady.hotel.Entity.Reservation;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;

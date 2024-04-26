@@ -1,9 +1,9 @@
-package com.fady.hotel.reservation;
+package com.fady.hotel.Dto;
 
 import java.util.Date;
 
-import com.fady.hotel.room.Room;
-import com.fady.hotel.user.UserInfo;
+import com.fady.hotel.Entity.Room;
+import com.fady.hotel.Entity.UserInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +25,6 @@ public class ReservationDTO {
     private float reservationPrice;
     private String reservationPaymentMethod;
     private String reservationPaymentStatus;
-    private String reservationPaymentDate;
+    private Date reservationPaymentDate;
 
 }

@@ -1,6 +1,6 @@
 package com.fady.hotel.configurations;
 
-import com.fady.hotel.authentification.JwtService;
+import com.fady.hotel.Service.JwtService;
 import com.fady.hotel.authentification.helpers.UserDetailsServiceImpl;
 
 import jakarta.servlet.FilterChain;

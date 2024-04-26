@@ -1,4 +1,4 @@
-package com.fady.hotel.user;
+package com.fady.hotel.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -22,8 +22,10 @@ public class UserInfo {
     @GeneratedValue
     private long id;
     private String username;
+
     @JsonIgnore
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserRole> roles = new HashSet<>();
 

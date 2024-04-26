@@ -1,7 +1,10 @@
-package com.fady.hotel.user;
+package com.fady.hotel.Service;
 
-import com.fady.hotel.user.dtos.UserRequest;
-import com.fady.hotel.user.dtos.UserResponse;
+import com.fady.hotel.Entity.UserInfo;
+import com.fady.hotel.Dto.UserRequest;
+import com.fady.hotel.Dto.UserResponse;
+import com.fady.hotel.Repository.UserRepository;
+import com.fady.hotel.Service.Interface.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;

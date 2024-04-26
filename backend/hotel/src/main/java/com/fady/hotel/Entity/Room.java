@@ -1,4 +1,4 @@
-package com.fady.hotel.room;
+package com.fady.hotel.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Room {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
     private String roomType;
     private String roomStatus;

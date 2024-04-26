@@ -1,31 +1,21 @@
-package com.fady.hotel.reservation;
+package com.fady.hotel.Controller;
 
 import java.util.List;
 
+import com.fady.hotel.Entity.Reservation;
+import com.fady.hotel.Service.Interface.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/reservations")
+@RequestMapping("/reservations")
 public class ReservationController {
 
     @Autowired
-    private ReservationServiceImpl reservationService;
-
-    @GetMapping("/example") // Define the endpoint path
-    public String forwardToExample() {
-        return "forward:/build/index.html"; // Forward the request to the HTML file
-    }
+    private ReservationService reservationService;
 
     @PostMapping
     public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation) {
@@ -47,7 +37,7 @@ public class ReservationController {
         }
     }
 
-    @DeleteMapping("/{reservationId}")
+    @DeleteMapping
     public ResponseEntity<String> deleteReservation(@RequestBody Long reservationId) {
         try {
             reservationService.deleteReservation(reservationId);
@@ -57,17 +47,18 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("{reservationId}")
-    public ResponseEntity<Reservation> getReservationById(@RequestParam Long reservationId) {
+    @GetMapping("{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
         try {
-            Reservation reservationResponse = reservationService.getReservationById(reservationId);
+            Reservation reservationResponse = reservationService.getReservationById(id);
             return ResponseEntity.ok(reservationResponse);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping({"/", ""})
     public ResponseEntity<List<Reservation>> getAllReservations() {
         try {
             List<Reservation> reservationResponse = reservationService.getAllReservations();
@@ -77,7 +68,7 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/")
     public ResponseEntity<List<Reservation>> getReservationByUserId(@RequestParam Long userId) {
         try {
             List<Reservation> reservationResponse = reservationService.getReservationByUserId(userId);

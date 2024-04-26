@@ -1,30 +1,24 @@
-package com.fady.hotel.room;
+package com.fady.hotel.Controller;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.fady.hotel.Entity.Room;
+import com.fady.hotel.Dto.RoomSearchDTO;
+import com.fady.hotel.Service.Interface.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/rooms")
+@RequestMapping("/rooms")
 public class RoomController {
 
     @Autowired
-    private RoomServiceImpl roomService;
+    private RoomService roomService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Room> saveRoom(@RequestBody Room room) {
         try {
@@ -47,8 +41,8 @@ public class RoomController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRoom(@RequestBody Long id) {
+    @DeleteMapping
+    public ResponseEntity<String> deleteRoom(@RequestParam Long id) {
         try {
             roomService.deleteRoom(id);
             return ResponseEntity.ok("Room deleted successfully");
@@ -58,7 +52,7 @@ public class RoomController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Room>> getRoomById(@RequestParam Long id) {
+    public ResponseEntity<Optional<Room>> getRoomById(@PathVariable Long id) {
         try {
             Optional<Room> roomResponse = roomService.getRoomById(id);
             return ResponseEntity.ok(roomResponse);
@@ -67,7 +61,7 @@ public class RoomController {
         }
     }
 
-    @GetMapping
+    @GetMapping({"/", ""})
     public ResponseEntity<List<Room>> getAllRooms() {
         try {
             List<Room> roomResponses = roomService.getAllRooms();

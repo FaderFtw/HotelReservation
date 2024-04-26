@@ -1,9 +1,6 @@
-package com.fady.hotel.reservation;
+package com.fady.hotel.Entity;
 
 import java.util.Date;
-
-import com.fady.hotel.room.Room;
-import com.fady.hotel.user.UserInfo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,17 +29,22 @@ public class Reservation {
     private Date checkInDate;
     @Temporal(TemporalType.DATE)
     private Date checkOutDate;
+
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserInfo user;
+
     private String reservationStatus;
     private String reservationType;
+
     private float reservationPrice;
     private String reservationPaymentMethod;
     private String reservationPaymentStatus;
-    private String reservationPaymentDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date reservationPaymentDate;
 
 }

@@ -1,9 +1,13 @@
-package com.fady.hotel.room;
+package com.fady.hotel.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.fady.hotel.Dto.RoomSearchDTO;
+import com.fady.hotel.Entity.Room;
+import com.fady.hotel.Repository.RoomRepository;
+import com.fady.hotel.Service.Interface.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

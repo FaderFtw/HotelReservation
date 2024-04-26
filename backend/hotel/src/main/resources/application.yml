@@ -1,10 +1,11 @@
 spring:
-  application:
-    name: hotel
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hotelapp
+    username: root
+    password:
+
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        "[format_sql]": true

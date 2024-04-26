@@ -1,7 +1,7 @@
 package com.fady.hotel.authentification.helpers;
 
-import com.fady.hotel.user.UserInfo;
-import com.fady.hotel.user.UserRepository;
+import com.fady.hotel.Entity.UserInfo;
+import com.fady.hotel.Repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

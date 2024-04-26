@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Autowired
     JwtAuthFilter jwtAuthFilter;
 
-    private static final String[] WHITE_LIST_URL = { "/api/v1/auth/**",
+    private static final String[] WHITE_LIST_URL = { "/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -38,14 +38,13 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html",
-            "/api/v1/save",
-            "/api/v1/login",
-            "/api/v1/refreshToken",
-            "/api/v1/users/register",
-            "/api/v1/users/login",
-            "/api/v1/rooms", // TODO: remove this line
-            "/api/v1/rooms/**", // TODO: remove this line
-            "/api/v1/reservations/**", // TODO: remove this line
+            "/save",
+            "/refreshToken",
+            "/register",
+            "/login",
+            "/rooms",
+            "/rooms/**",
+            "/reservations/**",
     };
 
     @Bean
@@ -59,7 +58,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(WHITE_LIST_URL)
                         .permitAll())
-                .authorizeHttpRequests(requests -> requests.requestMatchers("/api/v1/**")
+                .authorizeHttpRequests(requests -> requests.requestMatchers("/**")
                         .authenticated())
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -73,7 +72,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Bean  // Managed by Spring IoC (the method's return value is registered as a bean in the application context.)
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());

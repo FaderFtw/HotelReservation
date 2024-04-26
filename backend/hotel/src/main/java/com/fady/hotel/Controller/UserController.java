@@ -1,12 +1,12 @@
-package com.fady.hotel.user;
+package com.fady.hotel.Controller;
 
-import com.fady.hotel.authentification.JwtService;
-import com.alaa.hotel.authentification.dtos.*;
+import com.fady.hotel.Service.JwtService;
 import com.fady.hotel.authentification.dtos.AuthRequestDTO;
 import com.fady.hotel.authentification.dtos.JwtResponseDTO;
-import com.fady.hotel.user.dtos.UserAuthRequest;
-import com.fady.hotel.user.dtos.UserRequest;
-import com.fady.hotel.user.dtos.UserResponse;
+import com.fady.hotel.Service.Interface.UserService;
+import com.fady.hotel.Dto.UserAuthRequest;
+import com.fady.hotel.Dto.UserRequest;
+import com.fady.hotel.Dto.UserResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +21,10 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/users")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     private JwtService jwtService;
@@ -50,9 +49,8 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping
+    @GetMapping({"/users/", "/users"})
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         try {
             List<UserResponse> userResponses = userService.getAllUser();
@@ -63,7 +61,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/profile")
+    @GetMapping("/users/profile")
     public ResponseEntity<UserResponse> getUserProfile() {
         try {
             UserResponse userResponse = userService.getUser();

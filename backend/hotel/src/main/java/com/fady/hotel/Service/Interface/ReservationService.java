@@ -1,7 +1,8 @@
-package com.fady.hotel.reservation;
+package com.fady.hotel.Service.Interface;
 
 import java.util.List;
 
+import com.fady.hotel.Entity.Reservation;
 import org.springframework.stereotype.Service;
 
 @Service

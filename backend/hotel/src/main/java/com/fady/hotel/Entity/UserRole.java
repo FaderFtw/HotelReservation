@@ -1,4 +1,4 @@
-package com.fady.hotel.user;
+package com.fady.hotel.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

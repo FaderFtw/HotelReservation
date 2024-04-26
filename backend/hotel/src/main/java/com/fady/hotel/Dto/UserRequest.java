@@ -1,4 +1,4 @@
-package com.fady.hotel.user.dtos;
+package com.fady.hotel.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,14 +7,15 @@ import lombok.ToString;
 
 import java.util.Set;
 
-import com.fady.hotel.user.UserRole;
+import com.fady.hotel.Entity.UserRole;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserAuthRequest {
+public class UserRequest {
 
+    private Long id;
     private String username;
     private String password;
     private Set<UserRole> roles;
