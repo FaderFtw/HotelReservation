@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fady.hotel.Entity.Room;
+import org.springdoc.core.converters.models.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,10 +16,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-      @SuppressWarnings("null")
       public Optional<Room> findById(Long roomId);
 
-      public List<Room> findByRoomType(String roomType);
+      Page<Room> findByRoomType(String roomType, Pageable pageable);
 
       public List<Room> findByRoomStatus(String roomStatus);
 

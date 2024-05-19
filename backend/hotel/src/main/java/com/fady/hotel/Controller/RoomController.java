@@ -7,9 +7,11 @@ import com.fady.hotel.Entity.Room;
 import com.fady.hotel.Dto.RoomSearchDTO;
 import com.fady.hotel.Service.Interface.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 
 @CrossOrigin
 @RestController
@@ -18,6 +20,9 @@ public class RoomController {
 
     @Autowired
     private RoomService roomService;
+
+    private static final int PAGE_SIZE = 5;
+
 
     @PostMapping
     public ResponseEntity<Room> saveRoom(@RequestBody Room room) {
@@ -66,6 +71,16 @@ public class RoomController {
         try {
             List<Room> roomResponses = roomService.getAllRooms();
             return ResponseEntity.ok(roomResponses);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping({"/type/{roomType}/{page}"})
+    public ResponseEntity<List<Room>> getRoomsByType(@PathVariable String roomType, @PathVariable int page) {
+        try {
+            Page<Room> roomResponses = roomService.getRoomsByType(roomType, page, PAGE_SIZE);
+            return ResponseEntity.ok(roomResponses.getContent());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

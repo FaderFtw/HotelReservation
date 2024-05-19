@@ -9,6 +9,10 @@ import com.fady.hotel.Entity.Room;
 import com.fady.hotel.Repository.RoomRepository;
 import com.fady.hotel.Service.Interface.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +40,13 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     };
+
+    @Override
+    public Page<Room> getRoomsByType(String roomType, int pageNumber, int pageSize) {
+        Sort sort = Sort.by("roomCapacity").ascending();
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        return roomRepository.findByRoomType(roomType, pageable);
+    }
 
     @Override
     public Room updateRoom(Room room) {
